@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-module.exports = {
+let config = {
     //页面入口文件配置
     entry: {
         index: path.resolve(__dirname, './src/App.jsx')
@@ -11,6 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js'
     },
+    mode: process.env.NODE_ENV,
     module: {
         //加载器配置
         rules: [
@@ -35,6 +36,15 @@ module.exports = {
                 loader: 'style-loader!css-loader'
             },
             {
+                test: /\.less$/,
+                exclude: path.resolve(__dirname, './node_modules'),
+                use: [
+                    'style-loader',
+                    { loader: 'css-loader', options: {modules: true} },
+                    'less-loader'
+                ]
+            },
+            {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader?limit=8192'
             }
@@ -48,9 +58,14 @@ module.exports = {
     },
     //插件项
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        // new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
         extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
     }
 };
+if(process.env.NODE_ENV === 'development') {
+    config.output.publicPath = 'dist';
+    config.devtool = 'cheap-module-eval-source-map';
+}
+module.exports = config;
