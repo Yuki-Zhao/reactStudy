@@ -1,5 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
+//css抽离打包
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 let config = {
     //页面入口文件配置
@@ -33,16 +35,8 @@ let config = {
             },
             {
                 test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
-            {
-                test: /\.less$/,
                 exclude: path.resolve(__dirname, './node_modules'),
-                use: [
-                    'style-loader',
-                    { loader: 'css-loader', options: {modules: true} },
-                    'less-loader'
-                ]
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.(png|jpg)$/,
@@ -59,6 +53,10 @@ let config = {
     //插件项
     plugins: [
         // new webpack.HotModuleReplacementPlugin()
+        //将js和css分开
+        new ExtractTextPlugin({
+            filename: 'bundle.css'
+        })
     ],
     resolve: {
         extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
@@ -67,5 +65,16 @@ let config = {
 if(process.env.NODE_ENV === 'development') {
     config.output.publicPath = 'dist';
     config.devtool = 'cheap-module-eval-source-map';
+} else {
+    config.output.publicPath = './';
+    config.module.rules[1].use = ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: [{
+            loader: 'css-loader',
+            options: {
+                minimize: true //css压缩
+            }
+        }]
+    });
 }
 module.exports = config;
