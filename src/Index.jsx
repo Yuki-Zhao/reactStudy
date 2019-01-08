@@ -19,7 +19,8 @@ class Index extends Component {
         return (
             <div>
                 {/*<Select selectOptions={selectOptions} />*/}
-                <Select selectOptions={selectOptions} customOption />
+                {/*<Select selectOptions={selectOptions} customOption />*/}
+                <Select selectOptions={selectOptions} showSearch={true} />
             </div>
         )
     }
