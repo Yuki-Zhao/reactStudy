@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Select from './components/select/Select';
 
+import './../css/components/global.less';
+
 const selectOptions = [{
     key: 'jank',
     value: 'JANG'
@@ -16,7 +18,8 @@ class Index extends Component {
     render() {
         return (
             <div>
-                <Select selectOptions={selectOptions} />
+                {/*<Select selectOptions={selectOptions} />*/}
+                <Select selectOptions={selectOptions} customOption />
             </div>
         )
     }
