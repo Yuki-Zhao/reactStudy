@@ -34,9 +34,9 @@ let config = {
                 }]
             },
             {
-                test: /\.css$/,
+                test: /\.(css|less)$/,
                 exclude: path.resolve(__dirname, './node_modules'),
-                use: ['style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader', 'less-loader']
             },
             {
                 test: /\.(png|jpg)$/,
@@ -54,9 +54,8 @@ let config = {
     plugins: [
         // new webpack.HotModuleReplacementPlugin()
         //将js和css分开
-        new ExtractTextPlugin({
-            filename: 'bundle.css'
-        })
+        // new ExtractTextPlugin('bundle.css'),
+        new ExtractTextPlugin('bundle.less')
     ],
     resolve: {
         extensions: ['.js', '.jsx', '.css'] //后缀名自动补全

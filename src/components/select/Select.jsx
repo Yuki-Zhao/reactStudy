@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Option from './SelectOption';
 
-import './../../../css/components/select/Select.css';
+import './../../../css/components/select/Select.less';
 
 class Select extends Component {
     constructor(props) {
