@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Option from './SelectOption';
 import Util from './../../util/Util';
 
 import './../../../css/components/select/Select.less';
-//todo 失去焦点收起下拉列表问题
 
 class Select extends Component {
     constructor(props) {
@@ -11,12 +9,18 @@ class Select extends Component {
         let selectdValue = props.selectedValue || (this.props.selectOptions && this.props.selectOptions.length > 0 && this.props.selectOptions[0].value);
         this.state = {
             selectedValue: selectdValue,
-            isShow: false, //是否出现选项列表
+            isShow: props.isShowDropDown || false, //是否出现选项列表
             options: this.props.selectOptions, //选项列表
             searchInputPlac: selectdValue //搜索input的placehoder
         };
         this.changeValue = this.changeValue.bind(this);
         this.searchOptions = this.searchOptions.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(!nextProps.isShowDropDown && this.state.isShow) {
+            this.clickSelectedValue();
+        }
     }
 
     /**
@@ -30,31 +34,12 @@ class Select extends Component {
             searchInputPlac: value,
             isShow: false
         });
-        this.refs.selectSearchInput.value = value;
+        if(this.refs.selectSearchInput) {
+            this.refs.selectSearchInput.value = value;
+        }
         this.props.onChange && this.props.onChange(key, value);
     }
 
-    createOptions() {
-        if(this.state.options && this.state.options.length > 0) {
-            let uis = [];
-            this.state.options.forEach(function (option) {
-                uis.push(
-                    <Option key={option.key} title={option.key}
-                            isActive={option.value === this.state.selectedValue}
-                            onClick={this.changeValue}
-                    >
-                        {option.value}
-                    </Option>
-                )
-            }, this);
-            if(this.props.customOption) {
-               uis.push(
-                   <Option key='custom' isCustom={true} onClick={this.changeValue}></Option>
-               ) 
-            }
-            return uis;
-        }
-    }
 
     searchOptions(e) {
         let value = e.target.value,
@@ -64,51 +49,61 @@ class Select extends Component {
             let upperValue = value.toUpperCase();
             Util.delayCall(function () {
                 if(value === '') {
-                    that.setState({
-                        isShow: true,
-                        options: that.props.selectOptions
-                    })
+                    searchOptions = that.props.selectOptions;
                 } else {
                     that.props.selectOptions.forEach(function (option) {
                         if(option.value.toUpperCase().indexOf(upperValue) > -1) {
                             searchOptions.push(option);
                         }
                     });
-                    that.setState({
-                        isShow: true,
-                        options: searchOptions
-                    });
                 }
+                that.showSelectDropdown(searchOptions);
             });
         }
     }
-
-    searchFocus() {
-        this.refs.selectSearchInput.value = '';
+    
+    clickSelectedValue(selectOptions) {
+        let isShow;
+        if(this.state.isShow) {
+            Util.closeSelectDropdown();
+            if(this.props.showSearch) {
+                this.refs.selectSearchInput.blur();
+                this.refs.selectSearchInput.value = '';
+            }
+            isShow = false;
+        } else {
+            this.showSelectDropdown(selectOptions);
+            isShow = true;
+        }
         this.setState({
-            isShow: true,
-            options: this.props.selectOptions
+            isShow: isShow
         })
     }
 
-    clickSelectedValue() {
-        if(this.props.showSearch) return;
-        this.setState({isShow: !this.state.isShow});
+    showSelectDropdown(selectOptions) {
+        let selectDom = this.refs.select;
+        let that = this;
+        Util.showSelectDropdown(selectOptions, {
+            left: selectDom.offsetLeft,
+            top: selectDom.offsetTop + 30 + 5,
+            customOption: this.props.customOption,
+            onChange: (key, value) => {
+                that.changeValue(key, value);
+            }
+        });
     }
 
     render() {
-        //onBlur={() => {this.setState({isShow: false})}}
         return (
-            <div className='react-ui-select' tabIndex='-1' >
+            <div className='react-ui-select' ref='select'>
                 <div className='react-ui-select-selected'
-                     onClick={this.clickSelectedValue.bind(this)}
+                     onClick={this.clickSelectedValue.bind(this, this.props.selectOptions)}
 
                 >
                     {
                         this.props.showSearch ?
                             <div className="react-ui-select-search">
                                 <input onChange={this.searchOptions}
-                                       onFocus={this.searchFocus.bind(this)}
                                        placeholder={this.state.searchInputPlac}
                                        ref="selectSearchInput"
                                 />
@@ -116,12 +111,6 @@ class Select extends Component {
                             <div className='react-ui-select-selected-value'>{this.state.selectedValue}</div>
                     }
                     <span className='ui-icon-down' style={{transform: this.state.isShow ? 'rotate(180deg)' : 'rotate(0deg)',transition:'transform 1s linear'}}/>
-                </div>
-                <div className='react-ui-select-options'
-                     style={{display: this.state.isShow ? 'block' : 'none'}}
-                     ref="selectOptions"
-                >
-                    {this.createOptions()}
                 </div>
             </div>
         )

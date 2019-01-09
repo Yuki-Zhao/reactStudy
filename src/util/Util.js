@@ -1,4 +1,8 @@
+import SelectDropdown from './../components/select/SelectDropdown';
+
 let timeId;
+const selectDropdown = SelectDropdown.getInstance();
+let isShowSelectDropdown = false;
 
 let Util = {
     /**
@@ -21,6 +25,16 @@ let Util = {
                 func.apply(context || me);
             }
         }, duration || 300);
+    },
+
+    showSelectDropdown(values, options) {
+        selectDropdown.show({values, options});
+        isShowSelectDropdown = true;
+    },
+
+    closeSelectDropdown() {
+        selectDropdown.close();
+        isShowSelectDropdown = false;
     }
 };
 export default Util;
