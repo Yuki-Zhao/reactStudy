@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Util from './util/Util';
 import Select from './components/select/Select';
+import ButtonGroup from './components/button/ButtonGroup';
 
 import './../css/components/Index.less';
 
@@ -9,7 +10,8 @@ const selectOptions = [{
     value: 'JANG'
 },{
     key: 'lily',
-    value: 'LILY'
+    value: 'LILY',
+    disabled: true
 }, {
     key: 'andy',
     value: 'ANDY'
@@ -29,7 +31,7 @@ class Index extends Component {
      * @param e
      */
     onClick(e) {
-        if(!Util.isShowSelectDropdown) {
+        if(Util.isShowSelectDropdown === false) {
             Util.closeSelectDropdown();
             this.setState({
                 isShowSelectDropDown: false
@@ -44,18 +46,34 @@ class Index extends Component {
                     <div>React-UI</div>
                 </div>
                 <div className='react-ui-index-container'>
-                    <div className='react-ui-components-type'>Select选择器</div>
-                    <div className='react-ui-components'>
-                        <div className='react-ui-components-name'>默认Select</div>
-                        <Select selectOptions={selectOptions} />
-                    </div>
-                    {<div className='react-ui-components'>
-                        <div className='react-ui-components-name'>有自定义选项的Select</div>
-                        <Select selectOptions={selectOptions} customOption={true} />
-                    </div>}
-                    <div className='react-ui-components'>
-                        <div className='react-ui-components-name'>可搜索的Select</div>
-                        <Select selectOptions={selectOptions} isShowDropDown={this.state.isShowSelectDropDown} showSearch={true} />
+                    <div className='react-ui-index-nav' />
+                    <div className='react-ui-content'>
+                        <div className='react-ui-components-type'>Select选择器</div>
+                        <div className='react-ui-components'>
+                            <div className='react-ui-components-name'>默认Select</div>
+                            <Select selectOptions={selectOptions} />
+                        </div>
+                        {<div className='react-ui-components'>
+                            <div className='react-ui-components-name'>有自定义选项的Select</div>
+                            <Select selectOptions={selectOptions} customOption={true} />
+                        </div>}
+                        <div className='react-ui-components'>
+                            <div className='react-ui-components-name'>可搜索的Select</div>
+                            <Select selectOptions={selectOptions} isShowDropDown={this.state.isShowSelectDropDown} showSearch={true} />
+                        </div>
+                        <div className='react-ui-components-type'>ButtonGroup</div>
+                        <div className='react-ui-components'>
+                            <div className='react-ui-components-name'>large样式</div>
+                            <ButtonGroup buttons={selectOptions} size='large'/>
+                        </div>
+                        <div className='react-ui-components'>
+                            <div className='react-ui-components-name'>normal样式</div>
+                            <ButtonGroup buttons={selectOptions} />
+                        </div>
+                        <div className='react-ui-components'>
+                            <div className='react-ui-components-name'>small样式</div>
+                            <ButtonGroup buttons={selectOptions} size='small'/>
+                        </div>
                     </div>
                 </div>
             </div>

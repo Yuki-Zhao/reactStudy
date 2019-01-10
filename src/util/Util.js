@@ -2,7 +2,7 @@ import SelectDropdown from './../components/select/SelectDropdown';
 
 let timeId;
 const selectDropdown = SelectDropdown.getInstance();
-let isShowSelectDropdown = false;
+let isShowSelectDropdown = null;
 
 let Util = {
     /**

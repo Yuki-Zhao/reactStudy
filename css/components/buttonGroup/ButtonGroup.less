@@ -1,0 +1,51 @@
+@import "../global";
+
+.react-ui-button-group .react-ui-button-tab {
+    display: inline-block;
+    position: relative; /**为了让before元素位置对**/
+    border: @border;
+    border-left: 0;
+    text-align: center;
+    cursor: @pointer;
+}
+.react-ui-button-group .react-ui-button-tab:first-child {
+    border-left: @border;
+    border-radius: 4px 0 0 4px;
+}
+.react-ui-button-group .react-ui-button-tab:last-child {
+    border-radius: 0 4px 4px 0;
+}
+.react-ui-button-group .react-ui-button-tab>span {
+    display: inline-block;
+    padding: 12px 0;
+}
+/**hover效果**/
+.react-ui-button-group .react-ui-button-tab:hover,
+.react-ui-button-group .react-ui-button-tab.active {
+    color: @hoveBoderColor;
+    border-color: @hoveBoderColor;
+}
+.react-ui-button-group .react-ui-button-tab:hover:first-child,
+.react-ui-button-group .react-ui-button-tab.active:first-child {
+    border-color: @hoveBoderColor;
+}
+.react-ui-button-group .react-ui-button-tab:hover:before,
+.react-ui-button-group .react-ui-button-tab.active:before {
+    background-color: @hoveBoderColor !important;
+}
+.react-ui-button-group .react-ui-button-tab:not(:first-child)::before {
+     content: '';
+     display: block;
+     top: 0;
+     left: -1px;
+     width: 1px;
+     height: 100%;
+     position: absolute;
+}
+.react-ui-button-group .react-ui-button-tab.disabled,
+.react-ui-button-group .react-ui-button-tab.disabled:hover{
+  color: @disabledColor !important;
+  background-color: @diabledBackgroundColor !important;
+  border-color: @borderColor;
+  cursor: not-allowed;
+}

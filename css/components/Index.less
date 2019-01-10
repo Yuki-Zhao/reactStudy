@@ -1,5 +1,7 @@
 @import "global";
 
+@navWidth: 317px;
+
 .react-ui-index .react-ui-head {
   height: 63px;
   box-shadow: 0 2px 8px #f0f1f2;
@@ -15,8 +17,24 @@
   color: @hoveBoderColor;
 }
 .react-ui-index .react-ui-index-container {
+  height: 100%;
   margin: 0 15px;
 }
+.react-ui-index .react-ui-index-container >div {
+  display: inline-block;
+}
+/**导航条**/
+.react-ui-index .react-ui-index-nav {
+  width: @navWidth;
+  border-right: @border;
+  height: 100%;
+}
+
+.react-ui-index .react-ui-content {
+  margin-left: 64px;
+  vertical-align: top;
+}
+
 .react-ui-index .react-ui-components {
   width: 870px;
   height: 68px;
