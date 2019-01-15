@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Util from './util/Util';
-import Select from './components/select/Select';
+import SelectIndex from './components/select/SelectIndex';
 import ButtonGroup from './components/button/ButtonGroup';
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import './../css/components/Index.less';
 
@@ -41,42 +42,24 @@ class Index extends Component {
 
     render() {
         return (
-            <div className='react-ui-index' onMouseDown={this.onClick}>
-                <div className='react-ui-head'>
-                    <div>React-UI</div>
-                </div>
-                <div className='react-ui-index-container'>
-                    <div className='react-ui-index-nav' />
-                    <div className='react-ui-content'>
-                        <div className='react-ui-components-type'>Select选择器</div>
-                        <div className='react-ui-components'>
-                            <div className='react-ui-components-name'>默认Select</div>
-                            <Select selectOptions={selectOptions} />
+            <BrowserRouter>
+                <div className='react-ui-index' onMouseDown={this.onClick}>
+                    <div className='react-ui-head'>
+                        <div>React-UI</div>
+                    </div>
+                    <div className='react-ui-index-container'>
+                        <div className='react-ui-index-nav'>
+                            <ul>
+                                <li><Link to="/select">Select</Link></li>
+                                <li><Link to="/button">Button</Link></li>
+                            </ul>
                         </div>
-                        {<div className='react-ui-components'>
-                            <div className='react-ui-components-name'>有自定义选项的Select</div>
-                            <Select selectOptions={selectOptions} customOption={true} />
-                        </div>}
-                        <div className='react-ui-components'>
-                            <div className='react-ui-components-name'>可搜索的Select</div>
-                            <Select selectOptions={selectOptions} isShowDropDown={this.state.isShowSelectDropDown} showSearch={true} />
-                        </div>
-                        <div className='react-ui-components-type'>ButtonGroup</div>
-                        <div className='react-ui-components'>
-                            <div className='react-ui-components-name'>large样式</div>
-                            <ButtonGroup buttons={selectOptions} size='large'/>
-                        </div>
-                        <div className='react-ui-components'>
-                            <div className='react-ui-components-name'>normal样式</div>
-                            <ButtonGroup buttons={selectOptions} />
-                        </div>
-                        <div className='react-ui-components'>
-                            <div className='react-ui-components-name'>small样式</div>
-                            <ButtonGroup buttons={selectOptions} size='small'/>
+                        <div className='react-ui-content'>
+                            <Route path="/select" component={SelectIndex}/>
                         </div>
                     </div>
                 </div>
-            </div>
+            </BrowserRouter>
         )
     }
 
