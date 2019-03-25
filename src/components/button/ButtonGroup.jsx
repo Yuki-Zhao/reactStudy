@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 
 import './../../../css/components/buttonGroup/ButtonGroup.less';
 
+/**
+ * 组合Button
+ * @buttons Array 按钮的数组，包含key，value,disabled
+ * @size String  按钮大小：large,small,默认
+ * @onClick Function 点击回调函数
+ */
 class ButtonGroup extends Component {
     constructor(props) {
         super(props);

@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="./css/font/iconfont.css">
-    <link rel="stylesheet" href="./dist/bundle.css">
+    <!--<link rel="stylesheet" href="./dist/bluebundle.css">-->
 </head>
 <body>
 <div id="app"></div>
+<!--<button onclick="changeTheme('Blue')">Blue</button>
+<button onclick="changeTheme('Green')">Green</button>-->
 
 <script src="./dist/bundle.js"></script>
+<script>
+    function changeTheme(type) {
+        if(type === 'Green') {
+            var link = document.createElement('link');
+            link.type = 'text/css';
+            link.id = "theme-css-dark";  // 加上id方便后面好查找到进行删除
+            link.rel = 'stylesheet';
+            link.href = './dist/greenbundle.css';
+            document.getElementsByTagName("head")[0].appendChild(link);
+        } else {
+            document.getElementById('theme-css-dark').remove();
+        }
+    }
+</script>
 </body>
 </html>

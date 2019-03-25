@@ -36,7 +36,7 @@ let config = {
             {
                 test: /\.(css|less)$/,
                 exclude: path.resolve(__dirname, './node_modules'),
-                use: ['style-loader', 'css-loader', 'less-loader']
+                use:[ 'style-loader','css-loader','less-loader']
             },
             {
                 test: /\.(png|jpg)$/,
@@ -58,7 +58,7 @@ let config = {
         new ExtractTextPlugin('bundle.less')
     ],
     resolve: {
-        extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
+        extensions: ['.js', '.jsx', '.css', 'less'] //后缀名自动补全
     }
 };
 if(process.env.NODE_ENV === 'development') {

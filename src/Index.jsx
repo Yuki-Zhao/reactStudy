@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Util from './util/Util';
 import SelectIndex from './components/select/SelectIndex';
-import ButtonGroup from './components/button/ButtonGroup';
+import ButtonIndex from './components/button/ButtonIndex';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import './../css/components/Index.less';
@@ -50,12 +50,13 @@ class Index extends Component {
                     <div className='react-ui-index-container'>
                         <div className='react-ui-index-nav'>
                             <ul>
-                                <li><Link to="/select">Select</Link></li>
-                                <li><Link to="/button">Button</Link></li>
+                                <li><Link to="/select">Select选择器</Link></li>
+                                <li><Link to="/button">Button按钮</Link></li>
                             </ul>
                         </div>
                         <div className='react-ui-content'>
                             <Route path="/select" component={SelectIndex}/>
+                            <Route path="/button" component={ButtonIndex}/>
                         </div>
                     </div>
                 </div>

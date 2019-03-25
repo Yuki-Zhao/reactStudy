@@ -1,10 +1,10 @@
-@import "global";
+@import "global.less";
 
 @navWidth: 317px;
 
-ul() {react-ui-index-nav}
-
 .react-ui-index {
+  width: 100%;
+  height: 100%;
   .react-ui-head {
     height: 63px;
     box-shadow: 0 2px 8px #f0f1f2;
@@ -20,7 +20,7 @@ ul() {react-ui-index-nav}
     color: @hoveBoderColor;
   }
   .react-ui-index-container {
-    height: 100%;
+    //height: calc(100% - 63px);
     margin: 0 15px;
   }
   .react-ui-index-container >div {
@@ -32,6 +32,25 @@ ul() {react-ui-index-nav}
     border-right: @border;
     height: 100%;
   }
+  .react-ui-index-nav {
+    ul {
+      padding: 0;
+    }
+    li {
+      height: 40px;
+      margin: 4px 0 8px 0;
+      padding: 0 16px 0 80px;
+    }
+    li:hover {
+      color: @hoverColor;
+    }
+    a {
+      display: block;
+      height: 40px;
+      text-decoration: none;
+    }
+  }
+  /**导航条 end**/
   .react-ui-content {
     margin-left: 64px;
     vertical-align: top;

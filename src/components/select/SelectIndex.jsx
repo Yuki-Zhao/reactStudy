@@ -23,6 +23,14 @@ class SelectIndex extends Component {
                     <div className='react-ui-components-name'>默认Select</div>
                     <Select selectOptions={selectOptions} />
                 </div>
+                <div className='react-ui-components'>
+                    <div className='react-ui-components-name'>带有搜索框</div>
+                    <Select selectOptions={selectOptions} showSearch={true}/>
+                </div>
+                <div className='react-ui-components'>
+                    <div className='react-ui-components-name'>带有自定义选项</div>
+                    <Select selectOptions={selectOptions} customOption={true}/>
+                </div>
             </div>
         )
     }

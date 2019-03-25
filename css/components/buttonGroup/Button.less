@@ -1,0 +1,39 @@
+@import "../variable.less";
+
+.buttonColor(@color:@fontColor, @backgroundColor: #fffff, @borderCol: @borderColor) {
+  color: @color;
+  background-color: @backgroundColor;
+  border-color: @borderCol;
+}
+
+.react-ui-button {
+  width: 80px;
+  height: 32px;
+  padding: 0 15px;
+  border-radius: @borderRadius;
+  cursor: @pointer;
+  border: 1px solid;
+  background-color: #ffffff;
+}
+.react-ui-button.primary {
+  .buttonColor(#ffffff, @hoveBoderColor, @hoveBoderColor);
+}
+.react-ui-button.default {
+  .buttonColor
+}
+.react-ui-button.dashed {
+  border: 1px dashed @borderColor;
+}
+.react-ui-button.danger {
+  .buttonColor(@dangerColor, @selectColor);
+}
+.react-ui-button.primary:hover {
+  opacity: 0.7;
+}
+.react-ui-button.default:hover,
+.react-ui-button.dashed:hover {
+  .buttonColor(@color:@hoveBoderColor, @borderCol: @hoveBoderColor);
+}
+.react-ui-button.danger:hover {
+  .buttonColor(#ffffff, @dangerColor);
+}
