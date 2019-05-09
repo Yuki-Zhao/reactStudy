@@ -18,11 +18,14 @@ let config = {
         //加载器配置
         rules: [
             {
-              /*  test: /\.js|jsx$/,
+                test: /\.(tsx|ts)$/,
                 include: path.resolve(__dirname, './src'),
                 exclude: path.resolve(__dirname, './node_modules'),
-                loaders: ['react-hot-loader', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0']*/
-
+                use: [{
+                    loader: 'ts-loader'
+                }]
+            },
+            {
                 test: /\.(jsx|js)$/,
                 include: path.resolve(__dirname, './src'),
                 exclude: path.resolve(__dirname, './node_modules'),
@@ -58,7 +61,7 @@ let config = {
         new ExtractTextPlugin('bundle.less')
     ],
     resolve: {
-        extensions: ['.js', '.jsx', '.css', 'less'] //后缀名自动补全
+        extensions: ['.ts','.tsx','.js', '.jsx', '.css', 'less'] //后缀名自动补全
     }
 };
 if(process.env.NODE_ENV === 'development') {
