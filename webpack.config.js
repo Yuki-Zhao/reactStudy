@@ -61,7 +61,7 @@ let config = {
         new ExtractTextPlugin('bundle.less')
     ],
     resolve: {
-        extensions: ['.ts','.tsx','.js', '.jsx', '.css', 'less'] //后缀名自动补全
+        extensions: ['.ts','.tsx','.js', '.jsx', '.css', '.less'] //后缀名自动补全
     }
 };
 if(process.env.NODE_ENV === 'development') {
