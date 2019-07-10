@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Util from './util/Util';
 import SelectIndex from './components/select/SelectIndex';
-import ButtonIndex from './components/button/ButtonIndex';
+import RadioIndex from './components/radio/RadioIndex';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import './../css/components/Index.less';
@@ -52,11 +52,13 @@ class Index extends Component {
                             <ul>
                                 <li><Link to="/select">Select选择器</Link></li>
                                 <li><Link to="/button">Button按钮</Link></li>
+                                <li><Link to="/radio">Radio单选框</Link></li>
                             </ul>
                         </div>
                         <div className='react-ui-content'>
                             <Route path="/select" component={SelectIndex}/>
                             <Route path="/button" component={ButtonIndex}/>
+                            <Route path="/radio" component={RadioIndex}/>
                         </div>
                     </div>
                 </div>
